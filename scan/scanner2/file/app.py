@@ -14,8 +14,8 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # إعداد مسارات القواعد والمجلدات المؤقتة
-RULES_DIR = r"C:\\Users\\NITRO 5\\Desktop\\scanner2\\file\\rules"
-THREAT_DB_DIR = r"C:\\Users\\NITRO 5\\Desktop\\scanner2\\file\\threat_db"
+RULES_DIR = "rules"
+THREAT_DB_DIR = "threat_db"
 UPLOAD_DIR = "uploads/"
 EXTRACT_DIR = os.path.join(UPLOAD_DIR, "extracted")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
