@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges(Quiz)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #2c2c2e;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2 {
+            color: #ffd700;
+            text-align: center;
+        }
+        .levels {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .level-btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .level-btn:hover {
+            background-color: #0056b3;
+        }
+        .challenge {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 8px;
+            display: none;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Challenges(Quiz)</h1>
+
+    <!-- Level Selection -->
+    <div class="levels">
+        <button class="level-btn" onclick="showLevel('easy')">Easy</button>
+        <button class="level-btn" onclick="showLevel('medium')">Medium</button>
+        <button class="level-btn" onclick="showLevel('hard')">Hard</button>
+    </div>
+
+    <!-- Easy Challenges -->
+    <div class="challenge" id="easy">
+        <h2>Easy Challenges</h2>
+        <div class="question" id="question1">
+            <p><strong>Question 1:</strong> What is the binary representation of the decimal number 5?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> 100</label>
+                <label><input type="radio" name="q1" value="b"> 101</label>
+                <label><input type="radio" name="q1" value="c"> 110</label>
+            </div>
+        </div>
+    
+        <!-- Question 2 -->
+        <div class="question" id="question2">
+            <p><strong>Question 2:</strong> Which protocol is used to securely browse the web?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> HTTP</label>
+                <label><input type="radio" name="q2" value="b"> HTTPS</label>
+                <label><input type="radio" name="q2" value="c"> FTP</label>
+            </div>
+        </div>
+    
+        <!-- Question 3 -->
+        <div class="question" id="question3">
+            <p><strong>Question 3:</strong> What is the primary purpose of a firewall?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> Speeding up the internet</label>
+                <label><input type="radio" name="q3" value="B"> Preventing unauthorized access</label>
+                <label><input type="radio" name="q3" value="C"> Improving image quality</label>
+            </div>
+        </div>
+    
+        <!-- Question 4 -->
+        <div class="question" id="question4">
+            <p><strong>Question 4:</strong> What does a VPN (Virtual Private Network) do?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> Protects your Wi-Fi password</label>
+                <label><input type="radio" name="q4" value="B"> Secures your internet connection</label>
+                <label><input type="radio" name="q4" value="C"> Blocks spam emails</label>
+            </div>
+        </div>
+    
+        <!-- Question 5 -->
+        <div class="question" id="question5">
+            <p><strong>Question 5:</strong> What is the purpose of encryption?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> Making data larger</label>
+                <label><input type="radio" name="q5" value="B"> Converting data into unreadable format for unauthorized users</label>
+                <label><input type="radio" name="q5" value="C"> Deleting unwanted data</label>
+            </div>
+        </div>
+    
+        <!-- Question 6 -->
+        <div class="question" id="question6">
+            <p><strong>Question 6:</strong> What does the CIA triad stand for in cybersecurity?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> Confidentiality, Integrity, Availability</label>
+                <label><input type="radio" name="q6" value="B"> Confidentiality, Information, Access</label>
+                <label><input type="radio" name="q6" value="C"> Control, Integrity, Access</label>
+            </div>
+        </div>
+    
+        <!-- Question 7 -->
+        <div class="question" id="question7">
+            <p><strong>Question 7:</strong> What is the most common type of phishing attack?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> Email phishing</label>
+                <label><input type="radio" name="q7" value="B"> Social media phishing</label>
+                <label><input type="radio" name="q7" value="C"> SMS phishing</label>
+            </div>
+        </div>
+    
+        <!-- Question 8 -->
+        <div class="question" id="question8">
+            <p><strong>Question 8:</strong> What is a honeypot in network security?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> A trap for cyber attackers</label>
+                <label><input type="radio" name="q8" value="B"> A backup strategy</label>
+                <label><input type="radio" name="q8" value="C"> A device for monitoring performance</label>
+            </div>
+        </div>
+    
+        <!-- Question 9 -->
+        <div class="question" id="question9">
+            <p><strong>Question 9:</strong> What is the purpose of two-factor authentication?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> To add an additional layer of security</label>
+                <label><input type="radio" name="q9" value="B"> To remove the need for passwords</label>
+                <label><input type="radio" name="q9" value="C"> To increase internet speed</label>
+            </div>
+        </div>
+    
+        <!-- Question 10 -->
+        <div class="question" id="question10">
+            <p><strong>Question 10:</strong> What is SQL injection?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> A method to inject malware into servers</label>
+                <label><input type="radio" name="q10" value="B"> A technique to exploit vulnerabilities in databases</label>
+                <label><input type="radio" name="q10" value="C"> A way to increase database performance</label>
+            </div>
+        </div>
+        <!-- Question 11 -->
+        <div class="question" id="question12">
+            <p><strong>Question 11:</strong> Which of the following is NOT a best practice for online safety?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> Using strong, unique passwords</label>
+                <label><input type="radio" name="q11" value="b"> Clicking unknown links</label>
+                <label><input type="radio" name="q11" value="c"> Enabling 2FA</label>
+            </div>
+        </div>
+         <!-- Question 12 -->
+         <div class="question" id="question12">
+            <p><strong>Question 12:</strong> What is the first step in securing a wireless network?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> Changing the default SSID and password</label>
+                <label><input type="radio" name="q12" value="b"> Turning off the router</label>
+                <label><input type="radio" name="q12" value="c"> Blocking all devices</label>
+            </div>
+        </div>
+          <!-- Question 13 -->
+          <div class="question" id="question13">
+            <p><strong>Question 13:</strong> What is the purpose of penetration testing?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> Testing internet speed</label>
+                <label><input type="radio" name="q13" value="b"> Identifying security vulnerabilities</label>
+                <label><input type="radio" name="q13" value="c"> Fixing malware infections</label>
+            </div>
+        </div>
+                 <!-- Question 14 -->
+                 <div class="question" id="question14">
+                    <p><strong>Question 14:</strong>What is a botnet?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="a"> A network of infected devices used for malicious purposes</label>
+                        <label><input type="radio" name="q14" value="b"> A secure network connection</label>
+                        <label><input type="radio" name="q14" value="c"> A type of antivirus software</label>
+                    </div>
+                </div>
+                   <!-- Question 15 -->
+                   <div class="question" id="question15">
+                    <p><strong>Question 15:</strong>What does "ransomware" do?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="a"> Protects your data</label>
+                        <label><input type="radio" name="q13" value="b"> Encrypts your files and demands payment</label>
+                        <label><input type="radio" name="q13" value="c"> Deletes unnecessary files</label>
+                    </div>
+                </div>
+        <!-- Continue similarly for questions 11 to 25 -->
+    
+        <button class="submit-btn" onclick="checkAnswers('easy',{
+            'q1': 'b', 'q2': 'b', 'q3': 'B', 'q4': 'B',
+            'q5': 'B', 'q6': 'A', 'q7': 'A', 'q8': 'A',
+            'q9': 'A', 'q10': 'B' ,'q11': 'b' ,'q12': 'a', 'q13': 'b', 'q14' : 'a', 'q15':'b'
+            /* Add mappings for the remaining questions */
+        })">Submit</button> 
+        <p class="feedback" id="easy-feedback"></p>
+    </div>
+
+    <!-- Medium Challenges -->
+    <div class="challenge" id="medium">
+        <h2>Medium Challenges</h2>
+        <div class="question" id="question1">
+            <p><strong>Question 1:</strong> What is the primary difference between symmetric and asymmetric encryption?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> Symmetric encryption uses two keys, while asymmetric uses one key</label>
+                <label><input type="radio" name="q1" value="b"> Symmetric encryption is faster but less secure than asymmetric encryption</label>
+                <label><input type="radio" name="q1" value="c"> Symmetric encryption uses the same key for encryption and decryption, while asymmetric uses a key pair.</label>
+                <label><input type="radio" name="q1" value="d"> Symmetric encryption is based on hashing algorithms, while asymmetric is not</label>
+            </div>
+        </div>
+    
+        <!-- Question 2 -->
+        <div class="question" id="question2">
+            <p><strong>Question 2:</strong>What is the main purpose of a SIEM (Security Information and Event Management) system?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a">  Encrypt sensitive data</label>
+                <label><input type="radio" name="q2" value="b">  Monitor and analyze security events across an organization</label>
+                <label><input type="radio" name="q2" value="c">  Manage firewall rules</label>
+                <label><input type="radio" name="q2" value="d">  Prevent malware from executing
+
+                </label>
+            </div>
+        </div>
+    
+        <!-- Question 3 -->
+        <div class="question" id="question3">
+            <p><strong>Question 3:</strong> Which attack exploits the trust between a user and a website by injecting unauthorized commands?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> Cross-Site Scripting (XSS)</label>
+                <label><input type="radio" name="q3" value="B"> Cross-Site Request Forgery (CSRF)</label>
+                <label><input type="radio" name="q3" value="C"> SQL Injection</label>
+                <label><input type="radio" name="q3" value="D"> Man-in-the-Middle</label>
+            </div>
+        </div>
+    
+        <!-- Question 4 -->
+        <div class="question" id="question4">
+            <p><strong>Question 4:</strong> What is the role of DNSSEC in cybersecurity?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> Prevent IP address spoofing</label>
+                <label><input type="radio" name="q4" value="B"> Add a layer of authentication to DNS queries</label>
+                <label><input type="radio" name="q4" value="C"> Block malicious domains automatically</label>
+                <label><input type="radio" name="q4" value="D"> Encrypt DNS traffic</label>
+            </div>
+        </div>
+    
+        <!-- Question 5 -->
+        <div class="question" id="question5">
+            <p><strong>Question 5:</strong> What type of malware encrypts the victim’s files and demands payment for the decryption Key?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> Trojan</label>
+                <label><input type="radio" name="q5" value="B"> Spyware</label>
+                <label><input type="radio" name="q5" value="C"> Ransomware</label>
+                <label><input type="radio" name="q5" value="D"> Worm</label>
+            </div>
+        </div>
+    
+        <!-- Question 6 -->
+        <div class="question" id="question6">
+            <p><strong>Question 6:</strong>Which protocol is used to secure communication over the web by encrypting data?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> HTTP</label>
+                <label><input type="radio" name="q6" value="B"> FTP</label>
+                <label><input type="radio" name="q6" value="C"> SSH</label>
+                <label><input type="radio" name="q6" value="D"> HTTPS</label>
+            </div>
+        </div>
+    
+        <!-- Question 7 -->
+        <div class="question" id="question7">
+            <p><strong>Question 7:</strong>What is a common indicator of an ARP spoofing attack?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> Slow network performance</label>
+                <label><input type="radio" name="q7" value="B"> Increased CPU usage on the client machine</label>
+                <label><input type="radio" name="q7" value="C"> Frequent DNS resolution failures</label>
+                <label><input type="radio" name="q7" value="D"> Duplicate IP addresses in the network</label>
+            </div>
+        </div>
+    
+        <!-- Question 8 -->
+        <div class="question" id="question8">
+            <p><strong>Question 8:</strong> Which of the following tools is commonly used for penetration testing?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> Wireshark</label>
+                <label><input type="radio" name="q8" value="B"> Metasploit</label>
+                <label><input type="radio" name="q8" value="C"> Splunk</label>
+                <label><input type="radio" name="q8" value="D"> Nessus</label>
+            </div>
+        </div>
+    
+        <!-- Question 9 -->
+        <div class="question" id="question9">
+            <p><strong>Question 9:</strong> What does the term "sandboxing" mean in cybersecurity?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> Isolating an untrusted program to analyze its behavior</label>
+                <label><input type="radio" name="q9" value="B"> Encrypting files for secure storage</label>
+                <label><input type="radio" name="q9" value="C"> Backing up critical data to the cloud</label>
+                <label><input type="radio" name="q9" value="D"> Preventing remote access to a system</label>
+            </div>
+        </div>
+    
+        <!-- Question 10 -->
+        <div class="question" id="question10">
+            <p><strong>Question 10:</strong> Which of the following is NOT a method of mitigating Distributed Denial of Service (DDoS) attacks?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> Using a Web Application Firewall (WAF)</label>
+                <label><input type="radio" name="q10" value="B"> Increasing bandwidth capacity</label>
+                <label><input type="radio" name="q10" value="C"> Encrypting server communications</label>
+                <label><input type="radio" name="q10" value="D"> Deploying a Content Delivery Network (CDN)</label>
+            </div>
+        </div>
+        <!-- Question 11 -->
+        <div class="question" id="question12">
+            <p><strong>Question 11:</strong> What is the purpose of a honeypot in a cybersecurity setup?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> To attract attackers and study their techniques</label>
+                <label><input type="radio" name="q11" value="b"> To prevent phishing emails</label>
+                <label><input type="radio" name="q11" value="c"> To encrypt critical data</label>
+                <label><input type="radio" name="q11" value="d"> To monitor internal employee activities</label>
+            </div>
+        </div>
+         <!-- Question 12 -->
+         <div class="question" id="question12">
+            <p><strong>Question 12:</strong> Which security principle ensures that data is not altered during transmission?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> Availability</label>
+                <label><input type="radio" name="q12" value="b"> Confidentiality</label>
+                <label><input type="radio" name="q12" value="c"> Integrity</label>
+                <label><input type="radio" name="q12" value="d"> Authenticity</label>
+            </div>
+        </div>
+          <!-- Question 13 -->
+          <div class="question" id="question13">
+            <p><strong>Question 13:</strong> What is a common way to detect malicious insider threats?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> Regular password changes</label>
+                <label><input type="radio" name="q13" value="b"> Monitoring user activity and access logs</label>
+                <label><input type="radio" name="q13" value="c"> Encrypting all organizational data</label>
+                <label><input type="radio" name="q13" value="d"> Blocking external IP addresses</label>
+            </div>
+        </div>
+                 <!-- Question 14 -->
+                 <div class="question" id="question14">
+                    <p><strong>Question 14:</strong>Which of the following is a primary feature of multi-factor authentication (MFA)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="a"> It replaces the need for passwords</label>
+                        <label><input type="radio" name="q14" value="b"> It requires two or more methods to verify a user’s identity</label>
+                        <label><input type="radio" name="q14" value="c"> It encrypts data during transmission</label>
+                        <label><input type="radio" name="q14" value="d"> It prevents all forms of phishing attacks</label>
+                        
+                    </div>
+                </div>
+                   <!-- Question 15 -->
+                   <div class="question" id="question15">
+                    <p><strong>Question 15:</strong>What is the role of a Certificate Authority (CA) in SSL/TLS communications?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="a"> To generate private keys for websites</label>
+                        <label><input type="radio" name="q13" value="b"> To issue and verify digital certificates</label>
+                        <label><input type="radio" name="q13" value="c"> To encrypt data on the server side</label>
+                        <label><input type="radio" name="q13" value="c"> To block unauthorized IP addresses</label>
+                    </div>
+                </div>
+        <!-- Continue similarly for questions 11 to 25 -->
+    
+        <button class="submit-btn" onclick="checkAnswers('medium',{
+            'q1': 'c', 'q2': 'b', 'q3': 'B', 'q4': 'B',
+            'q5': 'C', 'q6': 'D', 'q7': 'A', 'q8': 'B',
+            'q9': 'A', 'q10': 'C' ,'q11': 'a' ,'q12': 'c', 'q13': 'b', 'q14' : 'b', 'q15':'b'
+            /* Add mappings for the remaining questions */
+        })">Submit</button> 
+        <p class="feedback" id="medium-feedback"></p>
+    </div>
+</div>
+ <!-- Hard Challenges -->
+ <div class="challenge" id="hard">
+    <h2>Hard Challenges</h2>
+    <div class="question" id="question1">
+        <p><strong>Question 1:</strong> What is the primary difference between symmetric and asymmetric encryption?</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> Symmetric encryption uses two keys, while asymmetric uses one key</label>
+            <label><input type="radio" name="q1" value="b"> Symmetric encryption is faster but less secure than asymmetric encryption</label>
+            <label><input type="radio" name="q1" value="c"> Symmetric encryption uses the same key for encryption and decryption, while asymmetric uses a key pair.</label>
+            <label><input type="radio" name="q1" value="d"> Symmetric encryption is based on hashing algorithms, while asymmetric is not</label>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question" id="question2">
+        <p><strong>Question 2:</strong>What is the main purpose of a SIEM (Security Information and Event Management) system?</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a">  Encrypt sensitive data</label>
+            <label><input type="radio" name="q2" value="b">  Monitor and analyze security events across an organization</label>
+            <label><input type="radio" name="q2" value="c">  Manage firewall rules</label>
+            <label><input type="radio" name="q2" value="d">  Prevent malware from executing
+
+            </label>
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question" id="question3">
+        <p><strong>Question 3:</strong> Which attack exploits the trust between a user and a website by injecting unauthorized commands?</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="A"> Cross-Site Scripting (XSS)</label>
+            <label><input type="radio" name="q3" value="B"> Cross-Site Request Forgery (CSRF)</label>
+            <label><input type="radio" name="q3" value="C"> SQL Injection</label>
+            <label><input type="radio" name="q3" value="D"> Man-in-the-Middle</label>
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question" id="question4">
+        <p><strong>Question 4:</strong> What is the role of DNSSEC in cybersecurity?</p>
+        <div class="options">
+            <label><input type="radio" name="q4" value="A"> Prevent IP address spoofing</label>
+            <label><input type="radio" name="q4" value="B"> Add a layer of authentication to DNS queries</label>
+            <label><input type="radio" name="q4" value="C"> Block malicious domains automatically</label>
+            <label><input type="radio" name="q4" value="D"> Encrypt DNS traffic</label>
+        </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question" id="question5">
+        <p><strong>Question 5:</strong> What type of malware encrypts the victim’s files and demands payment for the decryption Key?</p>
+        <div class="options">
+            <label><input type="radio" name="q5" value="A"> Trojan</label>
+            <label><input type="radio" name="q5" value="B"> Spyware</label>
+            <label><input type="radio" name="q5" value="C"> Ransomware</label>
+            <label><input type="radio" name="q5" value="D"> Worm</label>
+        </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question" id="question6">
+        <p><strong>Question 6:</strong>Which protocol is used to secure communication over the web by encrypting data?</p>
+        <div class="options">
+            <label><input type="radio" name="q6" value="A"> HTTP</label>
+            <label><input type="radio" name="q6" value="B"> FTP</label>
+            <label><input type="radio" name="q6" value="C"> SSH</label>
+            <label><input type="radio" name="q6" value="D"> HTTPS</label>
+        </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question" id="question7">
+        <p><strong>Question 7:</strong>What is a common indicator of an ARP spoofing attack?</p>
+        <div class="options">
+            <label><input type="radio" name="q7" value="A"> Slow network performance</label>
+            <label><input type="radio" name="q7" value="B"> Increased CPU usage on the client machine</label>
+            <label><input type="radio" name="q7" value="C"> Frequent DNS resolution failures</label>
+            <label><input type="radio" name="q7" value="D"> Duplicate IP addresses in the network</label>
+        </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question" id="question8">
+        <p><strong>Question 8:</strong> Which of the following tools is commonly used for penetration testing?</p>
+        <div class="options">
+            <label><input type="radio" name="q8" value="A"> Wireshark</label>
+            <label><input type="radio" name="q8" value="B"> Metasploit</label>
+            <label><input type="radio" name="q8" value="C"> Splunk</label>
+            <label><input type="radio" name="q8" value="D"> Nessus</label>
+        </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question" id="question9">
+        <p><strong>Question 9:</strong> What does the term "sandboxing" mean in cybersecurity?</p>
+        <div class="options">
+            <label><input type="radio" name="q9" value="A"> Isolating an untrusted program to analyze its behavior</label>
+            <label><input type="radio" name="q9" value="B"> Encrypting files for secure storage</label>
+            <label><input type="radio" name="q9" value="C"> Backing up critical data to the cloud</label>
+            <label><input type="radio" name="q9" value="D"> Preventing remote access to a system</label>
+        </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question" id="question10">
+        <p><strong>Question 10:</strong> Which of the following is NOT a method of mitigating Distributed Denial of Service (DDoS) attacks?</p>
+        <div class="options">
+            <label><input type="radio" name="q10" value="A"> Using a Web Application Firewall (WAF)</label>
+            <label><input type="radio" name="q10" value="B"> Increasing bandwidth capacity</label>
+            <label><input type="radio" name="q10" value="C"> Encrypting server communications</label>
+            <label><input type="radio" name="q10" value="D"> Deploying a Content Delivery Network (CDN)</label>
+        </div>
+    </div>
+    <!-- Question 11 -->
+    <div class="question" id="question12">
+        <p><strong>Question 11:</strong> What is the purpose of a honeypot in a cybersecurity setup?</p>
+        <div class="options">
+            <label><input type="radio" name="q11" value="a"> To attract attackers and study their techniques</label>
+            <label><input type="radio" name="q11" value="b"> To prevent phishing emails</label>
+            <label><input type="radio" name="q11" value="c"> To encrypt critical data</label>
+            <label><input type="radio" name="q11" value="d"> To monitor internal employee activities</label>
+        </div>
+    </div>
+     <!-- Question 12 -->
+     <div class="question" id="question12">
+        <p><strong>Question 12:</strong> Which security principle ensures that data is not altered during transmission?</p>
+        <div class="options">
+            <label><input type="radio" name="q12" value="a"> Availability</label>
+            <label><input type="radio" name="q12" value="b"> Confidentiality</label>
+            <label><input type="radio" name="q12" value="c"> Integrity</label>
+            <label><input type="radio" name="q12" value="d"> Authenticity</label>
+        </div>
+    </div>
+      <!-- Question 13 -->
+      <div class="question" id="question13">
+        <p><strong>Question 13:</strong> What is a common way to detect malicious insider threats?</p>
+        <div class="options">
+            <label><input type="radio" name="q13" value="a"> Regular password changes</label>
+            <label><input type="radio" name="q13" value="b"> Monitoring user activity and access logs</label>
+            <label><input type="radio" name="q13" value="c"> Encrypting all organizational data</label>
+            <label><input type="radio" name="q13" value="d"> Blocking external IP addresses</label>
+        </div>
+    </div>
+             <!-- Question 14 -->
+             <div class="question" id="question14">
+                <p><strong>Question 14:</strong>Which of the following is a primary feature of multi-factor authentication (MFA)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="a"> It replaces the need for passwords</label>
+                    <label><input type="radio" name="q14" value="b"> It requires two or more methods to verify a user’s identity</label>
+                    <label><input type="radio" name="q14" value="c"> It encrypts data during transmission</label>
+                    <label><input type="radio" name="q14" value="d"> It prevents all forms of phishing attacks</label>
+                    
+                </div>
+            </div>
+               <!-- Question 15 -->
+               <div class="question" id="question15">
+                <p><strong>Question 15:</strong>What is the role of a Certificate Authority (CA) in SSL/TLS communications?</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="a"> To generate private keys for websites</label>
+                    <label><input type="radio" name="q13" value="b"> To issue and verify digital certificates</label>
+                    <label><input type="radio" name="q13" value="c"> To encrypt data on the server side</label>
+                    <label><input type="radio" name="q13" value="c"> To block unauthorized IP addresses</label>
+                </div>
+            </div>
+    <!-- Continue similarly for questions 11 to 25 -->
+
+    <button class="submit-btn" onclick="checkAnswers('Hard',{
+        'q1': 'c', 'q2': 'b', 'q3': 'B', 'q4': 'B',
+        'q5': 'C', 'q6': 'D', 'q7': 'A', 'q8': 'B',
+        'q9': 'A', 'q10': 'C' ,'q11': 'a' ,'q12': 'c', 'q13': 'b', 'q14' : 'b', 'q15':'b'
+        /* Add mappings for the remaining questions */
+    })">Submit</button> 
+    <p class="feedback" id="hard-feedback"></p>
+</div>
+</div>
+<script>
+    function showLevel(level) {
+        document.querySelectorAll('.challenge').forEach(div => div.style.display = 'none');
+        document.getElementById(level).style.display = 'block';
+    }
+
+    function checkAnswers(level, answers) {
+        let correct = 0;
+        let total = Object.keys(answers).length;
+
+        Object.keys(answers).forEach(questionId => {
+            const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+            const questionElement = document.getElementById(questionId);
+
+            if (selectedOption) {
+                if (selectedOption.value === answers[questionId]) {
+                    correct++;
+                    selectedOption.parentElement.style.color = "green";
+                } else {
+                    selectedOption.parentElement.style.color = "red";
+                }
+            } else {
+                // No selection made
+                if (questionElement) questionElement.style.color = "orange";
+            }
+        });
+
+        const percentage = (correct / total) * 100;
+        const feedback = document.getElementById(`${level}-feedback`);
+        feedback.textContent = `You got ${correct} out of ${total} correct (${percentage.toFixed(2)}%).`;
+        feedback.style.color = correct === total ? "green" : "orange";
+    }
+</script>
+
+</body>
+</html>

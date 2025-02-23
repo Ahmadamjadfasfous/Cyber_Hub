@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving Challenges</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #2c2c2e;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #ffd700;
+            text-align: center;
+        }
+        .levels {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .level-btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .level-btn:hover {
+            background-color: #0056b3;
+        }
+        .challenge {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 8px;
+            display: none;
+        }
+        .challenge p {
+            font-size: 16px;
+        }
+        .answer-input {
+            margin-top: 10px;
+            padding: 8px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+        }
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        code {
+            font-family: monospace;
+            background-color: #444;
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Problem Solving Challenges</h1>
+
+    <!-- Level Selection -->
+    <div class="levels">
+        <button class="level-btn" onclick="showLevel('easy')">Easy</button>
+        <button class="level-btn" onclick="showLevel('medium')">Medium</button>
+        <button class="level-btn" onclick="showLevel('hard')">Hard</button>
+    </div>
+
+    <!-- Easy Challenges -->
+    <div class="challenge" id="easy">
+        <h2>Easy Challenges</h2>
+        <div class="question" id="question1">
+            <p><strong>Challenge 1:</strong> What is the binary representation of the decimal number 5?</p>
+            <input type="text" class="answer-input" id="answer1" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question1', '101', 'answer1')">Submit</button>
+            <p class="feedback" id="feedback1"></p>
+        </div>
+        <div class="question" id="question2">
+            <p><strong>Challenge 2:</strong> Fix the following Python code to print "Hello, World!": <code>print("Hello, World!")</code></p>
+            <input type="text" class="answer-input" id="answer2" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question2', 'print(\'Hello, World!\')', 'answer2')">Submit</button>
+            <p class="feedback" id="feedback2"></p>
+        </div>
+        <div class="question" id="question3">
+            <p><strong>Challenge 3:</strong> Which protocol is used to securely browse the web?</p>
+            <input type="text" class="answer-input" id="answer3" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question3', 'https', 'answer3')">Submit</button>
+            <p class="feedback" id="feedback3"></p>
+        </div>
+    </div>
+
+    <!-- Medium Challenges -->
+    <div class="challenge" id="medium">
+        <h2>Medium Challenges</h2>
+        <div class="question" id="question4">
+            <p><strong>Challenge 4:</strong> In Python, what does <code>len("cybersecurity")</code> return?</p>
+            <input type="text" class="answer-input" id="answer4" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question4', '13', 'answer4')">Submit</button>
+            <p class="feedback" id="feedback4"></p>
+        </div>
+        <div class="question" id="question5">
+            <p><strong>Challenge 5:</strong> Find the error in this code: <code>if 5 &gt; 3: print("Yes")</code></p>
+            <input type="text" class="answer-input" id="answer5" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question5', 'if 5 > 3: print(\'Yes\')', 'answer5')">Submit</button>
+            <p class="feedback" id="feedback5"></p>
+        </div>
+        <div class="question" id="question6">
+            <p><strong>Challenge 6:</strong> What is the hexadecimal representation of the decimal number 255?</p>
+            <input type="text" class="answer-input" id="answer6" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question6', 'ff', 'answer6')">Submit</button>
+            <p class="feedback" id="feedback6"></p>
+        </div>
+    </div>
+
+    <!-- Hard Challenges -->
+    <div class="challenge" id="hard">
+        <h2>Hard Challenges</h2>
+        <div class="question" id="question7">
+            <p><strong>Challenge 7:</strong> In JavaScript, what does <code>Boolean("0")</code> return?</p>
+            <input type="text" class="answer-input" id="answer7" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question7', 'true', 'answer7')">Submit</button>
+            <p class="feedback" id="feedback7"></p>
+        </div>
+        <div class="question" id="question8">
+            <p><strong>Challenge 8:</strong> In network security, what is a "honeypot"?</p>
+            <input type="text" class="answer-input" id="answer8" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question8', 'honeypot', 'answer8')">Submit</button>
+            <p class="feedback" id="feedback8"></p>
+        </div>
+        <div class="question" id="question9">
+            <p><strong>Challenge 9:</strong> Correct this JavaScript code to properly display a message: <code>console.log("Hello, World!")</code></p>
+            <input type="text" class="answer-input" id="answer9" placeholder="Your answer...">
+            <button class="submit-btn" onclick="checkAnswer('question9', 'console.log(\'Hello, World!\')', 'answer9')">Submit</button>
+            <p class="feedback" id="feedback9"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showLevel(level) {
+        document.querySelectorAll('.challenge').forEach(div => div.style.display = 'none');
+        document.getElementById(level).style.display = 'block';
+    }
+
+    function checkAnswer(questionId, correctAnswer, inputId) {
+        const input = document.getElementById(inputId);
+        const feedback = document.getElementById("feedback" + questionId.slice(-1));
+        let attempts = parseInt(input.dataset.attempts) || 0;
+
+        if (input.value.trim() === correctAnswer) {
+            feedback.textContent = "Correct!";
+            feedback.style.color = "green";
+            input.disabled = true;
+        } else if (attempts < 2) {
+            attempts++;
+            input.dataset.attempts = attempts;
+            feedback.textContent = `Incorrect. Attempts left: ${3 - attempts}`;
+            feedback.style.color = "orange";
+        } else {
+            feedback.textContent = "Incorrect. The correct answer is: " + correctAnswer;
+            feedback.style.color = "red";
+            input.disabled = true;
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall Basics: Types and Functions</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #2c2c2e;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+        }
+        h1 {
+            color: #ffd700;
+            text-align: center;
+        }
+        h2 {
+            color: #ffd700;
+            margin-top: 20px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Firewall Basics: Types and Functions</h1>
+    <p>
+        Firewalls are essential for safeguarding networks from unauthorized access and malicious attacks. By acting as a barrier between trusted internal networks and untrusted external networks, firewalls filter and control the traffic flow based on specific security rules, thus protecting sensitive data and systems.
+    </p>
+
+    <h2>1. Types of Firewalls</h2>
+    <p>
+        Understanding the different types of firewalls is key to choosing the right protection for various environments. Some common types include:
+        <ul>
+            <li><strong>Packet-Filtering Firewalls:</strong> These analyze data packets' header information to decide whether to allow or block traffic. They are simple but effective for basic network security needs, filtering traffic based on IP addresses, ports, and protocols.</li>
+            <li><strong>Stateful Inspection Firewalls:</strong> These firewalls go beyond packet inspection by monitoring the entire session's state and context. They assess each packet’s role in the connection, allowing only legitimate traffic through based on the state of the session.</li>
+            <li><strong>Proxy Firewalls:</strong> Acting as intermediaries, proxy firewalls filter traffic at the application layer, offering enhanced security by hiding the internal network structure and monitoring application-specific data.</li>
+            <li><strong>Next-Generation Firewalls (NGFW):</strong> NGFWs integrate multiple layers of security, including intrusion prevention, deep packet inspection, and application awareness. They are designed to detect and prevent modern, complex threats in real time.</li>
+        </ul>
+    </p>
+
+    <h2>2. Functions of Firewalls</h2>
+    <p>
+        Firewalls serve several critical functions, such as:
+        <ul>
+            <li><strong>Access Control:</strong> Blocking unauthorized access from external networks and preventing data breaches.</li>
+            <li><strong>Traffic Monitoring:</strong> Observing network traffic for abnormal patterns that could indicate threats or breaches.</li>
+            <li><strong>Application Control:</strong> Allowing or blocking access to specific applications or websites, helping enforce company policies and limit potential security risks.</li>
+            <li><strong>Content Filtering:</strong> Preventing access to harmful or inappropriate content, thereby reducing phishing and malware risks.</li>
+        </ul>
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+        Firewalls are indispensable to cybersecurity, providing a robust layer of protection against a wide array of threats. By understanding the types and functions of firewalls, organizations can implement effective strategies to secure their networks from unauthorized access and cyber attacks.
+    </p>
+</div>
+
+</body>
+</html>
