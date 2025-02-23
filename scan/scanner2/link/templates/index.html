@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فحص الروابط</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #2f2f2f;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #660909;
+            text-align: center;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        button {
+            background-color: #660909;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .clean {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .malicious {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>فحص الروابط</h1>
+    <form id="urlForm">
+        <div class="mb-3">
+            <label for="url" class="form-label">أدخل الرابط</label>
+            <input type="text" class="form-control" id="url" placeholder="أدخل الرابط هنا">
+        </div>
+        <button type="submit">فحص الرابط</button>
+    </form>
+
+    <div id="result" class="result">
+        <h3>نتائج الفحص</h3>
+        <p><strong>حالة الرابط:</strong> <span id="status"></span></p>
+        <p id="reason-container"><strong>السبب:</strong> <span id="reason"></span></p>
+        <hr>
+        <h4>معلومات النطاق (WHOIS):</h4>
+        <ul>
+            <li><strong>اسم النطاق:</strong> <span id="domain_name"></span></li>
+            <li><strong>الجهة المسجلة:</strong> <span id="registrar"></span></li>
+            <li><strong>تاريخ الإنشاء:</strong> <span id="creation_date"></span></li>
+            <li><strong>تاريخ الانتهاء:</strong> <span id="expiration_date"></span></li>
+        </ul>
+        <hr>
+        <h4>معلومات SSL:</h4>
+        <ul>
+            <li><strong>المصدر:</strong> <span id="issuer"></span></li>
+            <li><strong>من:</strong> <span id="valid_from"></span></li>
+            <li><strong>إلى:</strong> <span id="valid_to"></span></li>
+        </ul>
+        <hr>
+        <h4>معلومات DNS:</h4>
+        <ul>
+            <li><strong>سجل A (IP):</strong> <span id="a_record"></span></li>
+            <li><strong>سجل MX (البريد الإلكتروني):</strong> <span id="mx_record"></span></li>
+            <li><strong>سجل NS (الخوادم):</strong> <span id="ns_record"></span></li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#urlForm').on('submit', function (e) {
+            e.preventDefault();
+
+            const url = $('#url').val();
+            
+            $.ajax({
+                url: '/scan/url',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ url: url }),
+                success: function (response) {
+                    // إظهار النتائج
+                    $('#status').text(response.status);
+                    
+                    // تغيير اللون بناءً على حالة الرابط
+                    if (response.color === 'green') {
+                        $('#result').removeClass('malicious').addClass('clean');
+                        $('#reason-container').hide();  // إخفاء السبب إذا كان الرابط نظيفًا
+                    } else {
+                        $('#result').removeClass('clean').addClass('malicious');
+                        $('#reason-container').show();  // إظهار السبب إذا كان الرابط ملوثًا
+                    }
+                    
+                    $('#reason').text(response.reason);
+
+                    // معلومات النطاق
+                    if (response.domain_info) {
+                        $('#domain_name').text(response.domain_info.domain_name || 'غير متوفر');
+                        $('#registrar').text(response.domain_info.registrar || 'غير متوفر');
+                        $('#creation_date').text(response.domain_info.creation_date || 'غير متوفر');
+                        $('#expiration_date').text(response.domain_info.expiration_date || 'غير متوفر');
+                    }
+
+                    // معلومات SSL
+                    if (response.ssl_info) {
+                        $('#issuer').text(response.ssl_info.issuer || 'غير متوفر');
+                        $('#valid_from').text(response.ssl_info.valid_from || 'غير متوفر');
+                        $('#valid_to').text(response.ssl_info.valid_to || 'غير متوفر');
+                    }
+
+                    // معلومات DNS
+                    if (response.dns_info) {
+                        $('#a_record').text(response.dns_info["A Record"] ? response.dns_info["A Record"].join(", ") : 'غير متوفر');
+                        $('#mx_record').text(response.dns_info["MX Record"] ? response.dns_info["MX Record"].join(", ") : 'غير متوفر');
+                        $('#ns_record').text(response.dns_info["NS Record"] ? response.dns_info["NS Record"].join(", ") : 'غير متوفر');
+                    }
+
+                    // إظهار القسم الذي يحتوي على النتائج
+                    $('#result').show();
+                },
+                error: function (error) {
+                    alert('حدث خطأ أثناء الفحص.');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

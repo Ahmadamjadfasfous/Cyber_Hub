@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Malware Scanner</title>
+    <style>
+        body {
+            background-color: dimgray;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #fff34d;
+            border-radius: 5px;
+        }
+        input[type="file"], button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            background-color: #660909;
+            color: rgb(199, 202, 20);
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .clean {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .malicious {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Malware Scanner</h2>
+        <h4>Scan File:</h4>
+        <form id="file-form">
+            <input type="file" id="file-input" name="file" required>
+            <button type="submit">Scan File</button>
+        </form>
+
+        <div id="result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('file-form');
+        const resultDiv = document.getElementById('result');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('file-input');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/scan/file', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                displayResult(result);
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = 'An error occurred during the scan.';
+                resultDiv.style.display = "block";
+            }
+        };
+        
+
+        // عرض النتائج بتفاصيلها
+        function displayResult(result) {
+            resultDiv.style.display = "block";
+
+            // التحقق من نوع الملف والقيام بالإجراء المناسب
+            const fileType = result.file_info.type.toLowerCase();
+
+            // إذا كانت هناك مشكلة في البيانات أو الملف لا يحتوي على تفاصيل صحيحة، لا نعتبره خبيثًا
+            if (!result.status || !result.file_info || !result.file_info.type) {
+                resultDiv.className = "result error";
+                resultDiv.innerHTML = `
+                    <strong>Error:</strong><br>
+                    There was an issue processing the file. Please try again later.
+                `;
+                return;
+            }
+
+            // إذا كان الملف تنفيذي
+            if (fileType.includes('application/x-msdownload') || fileType.includes('.exe')) {
+                if (result.status === "Malicious") {
+                    resultDiv.className = "result malicious";
+                    resultDiv.innerHTML = `
+                        <strong>Malicious File Detected:</strong><br>
+                        <ul>
+                            <li><strong>Name:</strong> ${result.file_info.name}</li>
+                            <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                            <li><strong>Type:</strong> ${result.file_info.type}</li>
+                        </ul>
+                        <strong>Threat Details:</strong><br>
+                        ${result.details && result.details.details ? result.details.details.join(", ") : "No specific Yara matches found."}<br>
+                        <strong>Recommendation:</strong><br>
+                        Immediately take action as the file is confirmed as malicious.<br>
+                        Important: take the following steps immediately:<br>
+                        <ul>
+                            <li>Do not run the file – Avoid executing the file under any circumstances.</li>
+                            <li>Disconnect from the internet – If the file has been executed, disconnect your device from the internet to prevent potential malware communication.</li>
+                            <li>Delete the file – Immediately delete the file from your system and empty the recycle bin.</li>
+                            <li>Run a full antivirus scan – After removing the file, perform a full system scan.</li>
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.className = "result clean";
+                    resultDiv.innerHTML = `
+                        <strong>File is Clean:</strong><br>
+                        <ul>
+                            <li><strong>Name:</strong> ${result.file_info.name}</li>
+                            <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                            <li><strong>Type:</strong> ${result.file_info.type}</li>
+                        </ul>
+                        No threats found.<br><br>
+                        <strong>Recommendation:</strong><br>
+                        It's safe to proceed with the file. However, always ensure to:
+                        <ul>
+                            <li>Keep your antivirus software up-to-date.</li>
+                            <li>Download files only from trusted sources.</li>
+                            <li>Ensure that your firewall is enabled to protect against external threats.</li>
+                        </ul>
+                    `;
+                }
+            } 
+            // إذا كان الملف مضغوطًا
+            else if (fileType.includes('application/zip') || fileType.includes('application/x-rar-compressed')) {
+                if (result.status === "Malicious") {
+                    resultDiv.className = "result malicious";
+                    resultDiv.innerHTML = `
+                        <strong>Malicious File Detected (Compressed):</strong><br>
+                        <ul>
+                            <li><strong>Name:</strong> ${result.file_info.name}</li>
+                            <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                            <li><strong>Type:</strong> ${result.file_info.type}</li>
+                        </ul>
+                        <strong>Threat Details:</strong><br>
+                        ${result.details && result.details.details ? result.details.details.join(", ") : "No specific Yara matches found."}<br>
+                        <strong>Recommendation:</strong><br>
+                        Important: Do not extract this file.<br>
+                        Treat it as an executable and take the following steps immediately:<br>
+                        <ul>
+                            <li>Do not extract or run the file.</li>
+                            <li>Disconnect from the internet – If the file has been executed, disconnect your device from the internet to prevent potential malware communication.</li>
+                            <li>Delete the file – Immediately delete the file from your system and empty the recycle bin.</li>
+                            <li>Run a full antivirus scan – After removing the file, perform a full system scan.</li>
+                        </ul>
+                    `;
+                    
+                } else {
+                    resultDiv.className = "result clean";
+                    resultDiv.innerHTML = `
+                        <strong>File is Clean:</strong><br>
+                        <ul>
+                            <li><strong>Name:</strong> ${result.file_info.name}</li>
+                            <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                            <li><strong>Type:</strong> ${result.file_info.type}</li>
+                        </ul>
+                        No threats found.<br><br>
+                        <strong>Recommendation:</strong><br>
+                        It's safe to proceed with the file. However, always ensure to:
+                        <ul>
+                            <li>Keep your antivirus software up-to-date.</li>
+                            <li>Download files only from trusted sources.</li>
+                            <li>Ensure that your firewall is enabled to protect against external threats.</li>
+                        </ul>
+                    `;
+                }
+            } 
+            // إذا كان الملف غير تنفيذي وغير مضغوط
+            else if (result.status === "Malicious") {
+                resultDiv.className = "result malicious";
+                resultDiv.innerHTML = `
+                    <strong>Malicious File Detected:</strong><br>
+                    <ul>
+                        <li><strong>Name:</strong> ${result.file_info.name}</li>
+                        <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                        <li><strong>Type:</strong> ${result.file_info.type}</li>
+                    </ul>
+                    <strong>Threat Details:</strong><br>
+                    ${result.details && result.details.details ? result.details.details.join(", ") : "No specific Yara matches found."}<br>
+                    <strong>Recommendation:</strong><br>
+                    <ul>
+                        <li> Do not open the file if you haven't already.</li>
+                        <li> Delete the file from your system, and empty the recycle bin to ensure it is fully removed.</li>
+                        <li> Do not download or open files from untrusted sources.</li>
+                        <li> Keep your antivirus software and firewall active to prevent future threats.</li>
+                        <li> Perform a full system scan to ensure no other threats exist on your computer.</li>
+                        <li>Always use caution when opening files from emails, messages, or websites you don't trust.</li>
+                    </ul>
+                `;
+            } 
+            else {
+                resultDiv.className = "result clean";
+                resultDiv.innerHTML = `
+                    <strong>File is Clean:</strong><br>
+                    <ul>
+                        <li><strong>Name:</strong> ${result.file_info.name}</li>
+                        <li><strong>Size:</strong> ${result.file_info.size} bytes</li>
+                        <li><strong>Type:</strong> ${result.file_info.type}</li>
+                    </ul>
+                    No threats found.<br><br>
+                    <strong>Recommendation:</strong><br>
+                    It's safe to proceed with the file. However, always ensure to:
+                    <ul>
+                        <li>Keep your antivirus software up-to-date.</li>
+                        <li>Download files only from trusted sources.</li>
+                        <li>Ensure that your firewall is enabled to protect against external threats.</li>
+                    </ul>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
