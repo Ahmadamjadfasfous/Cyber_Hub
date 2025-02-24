@@ -17,6 +17,27 @@
 	</head>
 	<body class="is-preload landing">
 		<div id="page-wrapper">
+<!-- Add this inside the body of your existing page -->
+<div class="notification">
+    We apologize for any inconvenience. Some features may not be available due to maintenance or updates. We are working on fixing the issue and these features will be available soon.
+</div>
+
+<!-- Add this inside the <style> section -->
+<style>
+    .notification {
+        background-color: #ffcc00;
+        color: #333;
+        padding: 15px;
+        text-align: center;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        position: fixed;
+        top: 50px; /* Adjust the distance from the top */
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
 
 			<!-- Header -->
 				<header id="header">
@@ -51,26 +72,6 @@
 				</header>
 
 			<!-- Banner -->
-			<div class="notification">
-    We apologize for any inconvenience. Some features may not be available due to maintenance or updates. We are working on fixing the issue and these features will be available soon.
-</div>
-
-<!-- If you have a <style> section in your page, add this part inside it -->
-<style>
-    .notification {
-        background-color: #ffcc00;
-        color: #333;
-        padding: 15px;
-        text-align: center;
-        font-size: 16px;
-        font-family: Arial, sans-serif;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-</style>
 				<section id="banner">
 					<div class="content">
 						<header>
