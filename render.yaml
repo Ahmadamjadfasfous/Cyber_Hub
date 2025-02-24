@@ -1,0 +1,20 @@
+services:
+  - name: app-service
+    type: web
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python scan/scanner2/link/app.py"
+    plan: free
+    envVars:
+      - key: PORT
+        value: 5000
+
+  - name: app2-service
+    type: web
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python scan/scanner2/file/app2.py"
+    plan: free
+    envVars:
+      - key: PORT
+        value: 5001
