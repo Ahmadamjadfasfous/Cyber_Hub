@@ -218,4 +218,6 @@ def scan_file_endpoint():
         return jsonify({"error": f"Unexpected error: {e}"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # استخدم المنفذ من Render
+    app.run(debug=True, host="0.0.0.0", port=port)
+
