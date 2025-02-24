@@ -177,5 +177,6 @@ def scan_url_endpoint():
     return jsonify(result), 200
 
 if __name__ == '__main__':
-    print("Server running at http://127.0.0.1:5001")
-    app.run(port=5001, debug=True)
+    port = int(os.environ.get("PORT", 5001))  # استخدم المنفذ من Render
+    app.run(debug=True, host="0.0.0.0", port=port)
+
